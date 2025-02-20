@@ -1,2 +1,2 @@
 # spring-boot-training
-Code accompaniying Spring Boot training
+Code accompanying Spring Boot training
