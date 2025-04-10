@@ -63,7 +63,7 @@ public class WebSecurityConfig {
 		http
 
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/", "/introduction").permitAll()
+				.requestMatchers("/", "/intro").permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form
