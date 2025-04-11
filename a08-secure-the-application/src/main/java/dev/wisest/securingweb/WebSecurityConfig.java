@@ -24,9 +24,12 @@ package dev.wisest.securingweb;
  * #L%
  */
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationEventPublisher;
+import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -61,7 +64,6 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain formLoginFilterChain(HttpSecurity http) throws Exception {
 		http
-
 			.authorizeHttpRequests((requests) -> requests
 				.requestMatchers("/", "/intro").permitAll()
 				.anyRequest().authenticated()
@@ -99,4 +101,10 @@ public class WebSecurityConfig {
 
 		return new InMemoryUserDetailsManager(user, userAdmin, adminOnly);
 	}
+
+	@Bean
+	public AuthenticationEventPublisher authenticationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+		return new DefaultAuthenticationEventPublisher(applicationEventPublisher);
+	}
+
 }
